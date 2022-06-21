@@ -13,7 +13,7 @@ const orderSchema = mongoose.Schema({
                 required: true
             },
             qty:{
-                type: number,
+                type: Number,
                 required: true
             },
             image:{
