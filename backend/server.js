@@ -15,7 +15,7 @@ app.use((req, res, next) =>{
     next();
 })
 
-app.use('/api/products', productRoutes)
+app.use('/api/products/', productRoutes)
 
 app.use(notFound);
 app.use(errorHandler);
