@@ -3,7 +3,8 @@ import {authUser,
         registerUser, 
         getUserprofile, 
         updateUserprofile,
-        getUsers
+        getUsers,
+        deleteUser
     } from '../controllers/userController.js'
 import {protect, admin} from '../middleware/authMiddleware.js'
 const router = express.Router()
@@ -17,6 +18,7 @@ router.route('/login')
 router.route('/profile')
       .get(protect, getUserprofile)
       .put(protect, updateUserprofile)
+router.route('/:id').delete(protect, admin, deleteUser)
 
 
      
