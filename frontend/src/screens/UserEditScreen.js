@@ -7,7 +7,7 @@ import Loader from '../components/Loader.js'
 import FormContainer from '../components/FormContainer.js'
 import {getUserDetails, updateUser} from '../actions/userAction'
 import { USER_UPDATE_RESET } from '../constants/userConstants.js'
-import { LinkContainer } from 'react-router-bootstrap'
+
 
 
 const UserEditScreen = ({match,history}) => {

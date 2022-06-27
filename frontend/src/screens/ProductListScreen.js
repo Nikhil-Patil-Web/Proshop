@@ -4,7 +4,7 @@ import {Table, Button,Row, Col} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import Message from '../components/Message.js'
 import Loader from '../components/Loader.js'
-import {listProducts} from '../actions/productActions.js'
+import {listProducts,deleteProduct} from '../actions/productActions.js'
 
 const ProductListScreen = ({history, match}) => {
     
@@ -13,6 +13,10 @@ const ProductListScreen = ({history, match}) => {
 
     const productList = useSelector(state => state.productList)
     const {loading, error, products} = productList
+
+    const productDelete = useSelector(state => state.productDelete)
+    const {loading:loadingDelete, error: errorDelete, success:successDelete} = productDelete
+
 
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
@@ -23,12 +27,12 @@ const ProductListScreen = ({history, match}) => {
         }else{
             history.push('/login')
         }
-    },[history])
+    },[history, successDelete])
 
     const deleteHandler =(id)=>
     {
         if(window.confirm('Are you sure, you want to delete?')){
-          //DELETE PRODUCTS
+          dispatch(deleteProduct(id))
         }
         
     }
@@ -49,6 +53,8 @@ const ProductListScreen = ({history, match}) => {
             </Button>
         </Col>
     </Row>
+    {loadingDelete&&<Loader></Loader>}
+    {errorDelete&&<Message variant='danger'>{errorDelete}</Message>}
       {loading?<Loader></Loader>:error?<Message variant='danger'>{error}</Message>:(
         <Table striped bordered hover responsive className='table-sm'>
             <thead>
