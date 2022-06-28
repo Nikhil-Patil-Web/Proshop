@@ -1,4 +1,5 @@
 import path from 'path'
+import morgan from 'morgan'
 import express from 'express'
 import dotenv from 'dotenv'
 import colors from 'colors'
@@ -11,7 +12,13 @@ import {notFound, errorHandler} from './middleware/errorMiddleware.js'
 dotenv.config();
 connectDB()
 
+
 const app = express();
+
+if(process.env.NODE_ENV==='development'){
+    app.use(morgan("dev"))
+}
+
 
 app.use(express.json())
 
