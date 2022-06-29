@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {Helmet} from 'react-helmet'
 import Product from '../components/Product.js'
 import Loader from '../components/Loader.js'
 import Paginate from '../components/Paginate.js'
@@ -8,6 +7,7 @@ import Message from '../components/Message.js'
 import { Link } from 'react-router-dom'
 import ProductCarousel from '../components/ProductCarousel.js'
 import {Row, Col} from 'react-bootstrap'
+import Meta from '../components/Meta.js'
 import {listProducts} from '../actions/productActions.js'
 
 const HomeScreen = ({match}) => {
@@ -27,12 +27,7 @@ const { loading, error, products, page, pages } = productList
 
   return (
     <>
-    <Helmet>
-      <title>Welcome to Proshop | Home</title>
-      <meta name='description' content='We sell the best products for cheap prices'/>
-      <meta name='keywords' content='electronics, buy electronics, cheap electronics'/>
-
-    </Helmet>
+    <Meta></Meta>
      {!keyword ? (<ProductCarousel></ProductCarousel>):(
         <Link to='/' className='btn btn-light'>
           Go Back
