@@ -6,14 +6,17 @@ import Message from '../components/Message.js'
 import Loader from '../components/Loader.js'
 import {listProducts,deleteProduct, createProduct} from '../actions/productActions.js'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants.js'
+import Paginate from '../components/Paginate.js'
 
 const ProductListScreen = ({history, match}) => {
     
     const dispatch =useDispatch()
 
+    const pageNumber=match.params.pageNumber||1
+
 
     const productList = useSelector(state => state.productList)
-    const {loading, error, products} = productList
+    const {loading, error, products, pages, page} = productList
 
     const productDelete = useSelector(state => state.productDelete)
     const {loading:loadingDelete, error: errorDelete, success:successDelete} = productDelete
@@ -36,11 +39,11 @@ const ProductListScreen = ({history, match}) => {
             history.push(`/admin/product/${createdProduct._id}`)
         }
         else{
-            dispatch(listProducts())
+            dispatch(listProducts('', pageNumber))
         }
            
 
-    },[history, successDelete, successCreate])
+    },[history, successDelete, successCreate, pageNumber])
 
     const deleteHandler =(id)=>
     {
@@ -73,6 +76,7 @@ const ProductListScreen = ({history, match}) => {
     {errorCreate&&<Message variant='danger'>{errorCreate}</Message>}
 
       {loading?<Loader></Loader>:error?<Message variant='danger'>{error}</Message>:(
+        <>
         <Table striped bordered hover responsive className='table-sm'>
             <thead>
                 <tr>
@@ -107,6 +111,9 @@ const ProductListScreen = ({history, match}) => {
                 ))}
             </tbody>
         </Table>
+        <Paginate pages={pages} page={page} isAdmin='true'></Paginate>
+        </>
+      
       )}
     </>
   )

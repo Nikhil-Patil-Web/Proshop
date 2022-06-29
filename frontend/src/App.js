@@ -29,16 +29,21 @@ const App = () => {
         <Route path='/products/:id' component={ProductScreen}/>
         <Route path='/cart/:id?' component={CartScreen}/>
         <Route  path='/'component={HomeScreen} exact />
+        <Route  path='/page/:pageNumber'component={HomeScreen} exact />
+        <Route  path='/search/:keyword/page/:pageNumber'component={HomeScreen} exact />
+        <Route  path='/search/:keyword'component={HomeScreen} exact/>
         <Route path ='/register' component={RegisterScreen}></Route>
         <Route path ='/profile' component={ProfileScreen}></Route>
         <Route path ='/payment' component={PaymentScreen}></Route>
         <Route path='/placeorder' component={PlaceOrderScreen}></Route>
         <Route path='/orders/:id' component={OrderScreen}></Route>
         <Route path='/admin/userList' component={UserListScreen}></Route>
-        <Route path='/admin/productList' component={ProductListScreen}></Route>
+        <Route path='/admin/productList' component={ProductListScreen} exact></Route>
         <Route path='/admin/user/:id/edit' component={UserEditScreen}></Route>
         <Route path='/admin/product/:id/edit' component={ProductEditScreen}></Route>
         <Route path='/admin/orderList' component={OrderListScreen}></Route>
+        <Route path='/admin/productList/:pageNumber' component={ProductListScreen} exact></Route>
+
         
       </Container>
     </main>
